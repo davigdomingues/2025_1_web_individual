@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Davi Gabriel Domingues">
+    <title>Feedback for Davi's Profile Page</title>
+</head>
+
+<style>
+    h1{color: grey; text-align:center}
+    p{color: grey;}
+</style>
+
+<body>
+    <h1>Formulary about my personal details</h1>
+
+    <form action="/submit" method="GET" enctype="application/x-www-form-urlencoded">
+        <fieldset>
+            <h2>First information</h2>
+            <label for="text">Name</label>
+            <input type="text" id="text" name="Nome" placeholder="Text your name properly" required autofocus><br><br>
+
+            <label for="email adress">E-mail</label>
+            <input type="email" id="email adress" name="E-mail" placeholder="Text your email properly" required autofocus><br><br><br>
+
+            <label for="profile">How did you find my profile?</label>
+            <select id="profile" name="profile">
+                <option name="Google">Google</option>
+                <option name="Social Media">Social Media</option>
+                <option name="Friends">Friends</option>
+            </select><br><br>
+
+        </fieldset>
+
+        <fieldset>
+            <h2>Did you like the webpage?</h2>
+            <label for="yes">Yes</label>
+            <input type="radio" id="yes" name="satisfaction_option" value="YES" required><br>
+
+            <label for="no">No</label>
+            <input type="radio" id="no" name="satisfaction_option" value="NO" required><br>
+
+            <label for="maybe">Maybe</label>
+            <input type="radio" id="maybe" name="satisfaction_option" value="MAYBE" required><br>
+
+            <h2>What did you like about the profile?</h2>
+            <label for="design">Design</label>
+            <input type="checkbox" id="design" name="personal_preferences" value="DESIGN" required><br>
+
+            <label for="content">Content</label>
+            <input type="checkbox" id="content" name="personal_preferences" value="CONTENT" required><br>
+
+            <label for="ease_of_use">Easy of use</label>
+            <input type="checkbox" id="ease_of_use" name="personal_preferences" value="EASY_OF_USE" required><br>
+
+            <label for="other">Other</label>
+            <input type="checkbox" id="other" name="personal_preferences" value="OTHER" required><br>
+
+            <h3>Options: <input type="submit" value="submit">
+                <input type="reset" value="reset"></h3>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50" spellcheck="true" placeholder="Write your message here:"></textarea><br><br>
+        </fieldset>
+    </form>
+
+    <fieldset>
+        <h2>Audio clip (Sugar - Maroon 5):</h2>
+        <audio controls>
+            <source src="Maroon%205%20-%20Sugar.mp3" type="audio/mp3">
+        </audio>
+
+        <h2>Video clip (personal work during the course):</h2>
+        <video width="320" height="240" controls>
+            <source src="2024-12-04%2000-05-09.mkv" type="video/mp4">
+        </video><br><br>
+    </fieldset>
+
+</body>
+
+<footer>
+    <br><p>Thank you for your feedback! :)</p>
+</footer>
+
+</html>
