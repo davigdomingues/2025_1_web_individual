@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Complex JS Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        input, select, button {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Number input</h1>
+    <label for="operand1">
+        <input type="number" id="operand1" placeholder="First number">
+    </label>
+
+    <br>
+
+    <label for="operand2">
+        <input type="number" id="operand2" placeholder="Second number">
+    </label>
+
+    <br>
+    <br>
+
+    <label for="operations">Choose the operation:</label>
+    <br>
+    <select id="operations">
+        <option value="add">add</option>
+        <option value="subtract">subtract</option>
+        <option value="multiply">multiply</option>
+        <option value="divide">divide</option>
+    </select>
+
+    <button onclick="calculate()">Calculate</button>
+    <button onclick="clearFields()">Clear</button>
+
+    <div id="result"></div>
+
+    <script src="15447497.js"></script>
+</body>
+</html>
