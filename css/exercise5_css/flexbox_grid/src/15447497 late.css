@@ -1,0 +1,184 @@
+body {
+    background-color: grey;
+    font-size: 15px;
+    font-family: "Times New Roman", serif; /* Corrigir o nome da fonte */
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #222;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: red;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: white;
+}
+
+@media (max-width: 600px) {
+    nav ul {
+        display: block;
+        text-align: center;
+    }
+}
+
+.flex-gallery {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+
+.flex-gallery img:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    .flex-gallery {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    .content-wrapper {
+        flex-direction: column;
+    }
+}
+
+.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    flex: 2; /* coloca 2 imagens por coluna */
+}
+
+.grid-layout .item {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.link-grid {
+    flex: 1;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+}
+
+.link-grid ul {
+    list-style: none; /* Remove os marcadores de lista */
+    padding: 0; /* Remove o espaçamento interno */
+    margin: 0; /* Remove margens extras */
+}
+
+.link-grid ul li {
+    margin-bottom: 10px; /* Espaçamento entre os itens */
+}
+
+.link-grid a {
+    display: block;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.link-grid a:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 600px) {
+    .link-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+aside {
+    width: 25%;
+    padding: 10px;
+    background-color: #f4f4f4; /* Adiciona fundo para destaque */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+footer {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer-links,
+.footer-social {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social img:hover {
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Padronizando todas as imagens */
+img {
+    width: 80px; /* Define uma largura fixa */
+    height: 100px; /* Define uma altura fixa */
+    object-fit: cover; /* Garante que a imagem se ajuste sem distorção */
+    border-radius: 5px; /* Borda arredondada opcional */
+}
+
+/* Se precisar de tamanhos específicos para as galerias */
+.flex-gallery img,
+.grid-layout .item img,
+.footer-social img {
+    width: 60px; /* Define um tamanho específico para imagens da galeria */
+    height: 70px;
+}

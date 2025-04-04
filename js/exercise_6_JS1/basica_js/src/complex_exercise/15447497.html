@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Complex JS Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        input, select, button {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Number input</h1>
+    <label for="operand1">
+        <input type="number" id="operand1" placeholder="First number">
+    </label>
+
+    <br>
+
+    <label for="operand2">
+        <input type="number" id="operand2" placeholder="Second number">
+    </label>
+
+    <br>
+    <br>
+
+    <label for="operations">Choose the operation:</label>
+    <br>
+    <select id="operations">
+        <option value="add">add</option>
+        <option value="subtract">subtract</option>
+        <option value="multiply">multiply</option>
+        <option value="divide">divide</option>
+    </select>
+
+    <button onclick="calculate()">Calculate</button>
+    <button onclick="clearFields()">Clear</button>
+
+    <div id="result"></div>
+
+    <script>
+        let lastResult = null; // para encadeamento de operações
+
+        function performOperation(num1, num2, operation) {
+            switch (operation) {
+                case "add":
+                    return num1 + num2;
+
+                case "subtract":
+                    return num1 - num2;
+
+                case "multiply":
+                    return num1 * num2;
+
+                case "divide":
+                    return num2 !== 0 ? num1 / num2 : "Invalid Operation!";
+
+                default:
+                    return "Invalid Operation!";
+            }
+        }
+
+        function calculate() {
+            let num1Input = document.getElementById("operand1");
+            let num2Input = document.getElementById("operand2");
+            let operation = document.getElementById("operations").value;
+            let resultDiv = document.getElementById("result");
+
+            let num1 = parseFloat(num1Input.value);
+            let num2 = parseFloat(num2Input.value);
+
+            if (isNaN(num1)) {
+                if (lastResult !== null) {
+                    num1 = lastResult; // usa o último resultado
+            }
+
+                else {
+                    resultDiv.textContent = "Please enter the first number!";
+                    return;
+                }
+            }
+
+            if (isNaN(num2)) {
+                resultDiv.textContent = "Please enter the second number!";
+                return;
+            }
+
+            resultDiv.textContent = "Result: " + performOperation(num1, num2, operation);
+
+            if (!isNaN(result)) {
+                lastResult = result;
+            }
+        }
+
+        function clearFields() {
+            document.getElementById("operand1").value = "";
+            document.getElementById("operand2").value = "";
+            document.getElementById("result").textContent = "";
+            lastResult = null;
+        }
+
+        // Press enter to activate the calculus
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                calculate();
+            }
+        })
+</script>
+</body>
+</html>
