@@ -1,4 +1,4 @@
-// Código original
+// Código original:
 function sortCities(informations) {
     for (let i = 0; i < informations.length - 1; i++) {
         for (let j = i + 1; j < informations.length; j++) {
@@ -99,7 +99,7 @@ console.log("Hello, now some informations will be sorted. Let's see the results!
 let filterCriteria = prompt("First, choose the criteria (name, population, temperature, weatherDescription)");
 processCities(informations, filterCriteria);
 
-/* Versão otimizada 1
+/* Versão com for.. of:
 function sortCities(informations) {
     for (let i = 0; i < informations.length - 1; i++) {
         for (let j = i + 1; j < informations.length; j++) {
