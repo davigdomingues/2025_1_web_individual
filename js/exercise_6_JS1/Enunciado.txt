@@ -1,0 +1,52 @@
+Exercise 6: JavaScript 1
+
+Upload a html file named USPnumber1.USPnumber2.html.
+
+Choose one of the two exercises below:
+
+Simple JavaScript Calculator
+Instructions:
+
+Open your preferred code editor or browser-based environment, such as JSFiddle or CodePen.
+
+Create an HTML file and include the necessary tags for a basic HTML structure (<!DOCTYPE>, <html>, <head>, <body>). Add a <script> tag inside the <head> or at the end of the <body> to write your JavaScript code.
+
+In the JavaScript section, declare the following variables:
+
+num1: A number variable to store the first operand.
+num2: A number variable to store the second operand.
+operation: A string variable to store the chosen operation (addition, subtraction, multiplication, or division).
+result: A number variable to store the result of the operation.
+Write a function called performOperation that takes num1, num2, and operation as arguments. This function should perform the specified operation using a conditional statement (e.g., if-else or switch statement) and return the result.
+
+Test your performOperation function with different values for num1, num2, and operation. For example:
+
+num1 = 5, num2 = 3, operation = "add" should return 8.
+num1 = 7, num2 = 2, operation = "subtract" should return 5.
+num1 = 3, num2 = 4, operation = "multiply" should return 12.
+num1 = 10, num2 = 2, operation = "divide" should return 5.
+Display the result of each test case using console.log() or by appending the result to the HTML document using DOM manipulation.
+
+(Optional) Create a simple user interface with input fields and buttons to allow users to enter their own values for num1, num2, and operation. When the user clicks the "Calculate" button, display the result of the operation on the screen.
+
+
+Not So Simple Calculator
+Instructions:
+
+Open your preferred code editor or browser-based environment, such as JSFiddle or CodePen.
+
+Create an HTML file and include the necessary tags for a basic HTML structure (<!DOCTYPE>, <html>, <head>, <body>). Add a <script> tag inside the <head> or at the end of the <body> to write your JavaScript code.
+
+Create a simple user interface with the following elements:
+
+Two input fields for numbers (operands)
+A dropdown menu for selecting an operation (addition, subtraction, multiplication, division)
+A button labeled "Calculate"
+An area to display the result (e.g., a <div> element)
+In the JavaScript section, create a function called calculate that takes two numbers (operands) and an operation as arguments. This function should use a switch statement to perform the appropriate calculation based on the operation and return the result.
+
+Add an event listener to the "Calculate" button. When the button is clicked, read the values from the input fields and the dropdown menu, call the calculate function with these values, and display the result in the designated area.
+
+Implement error handling to deal with invalid inputs, such as non-numeric values, empty fields, or division by zero. Display an error message to the user when such issues are detected.
+
+(Optional) Add keyboard support, allowing the user to perform calculations by pressing the "Enter" key. Also, implement additional functionality, such as a "Clear" button to reset the input fields and result area, or the ability to chain multiple operations together.

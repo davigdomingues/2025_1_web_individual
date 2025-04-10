@@ -1,0 +1,118 @@
+Activity: Creating a Responsive Webpage Layout with CSS Flexbox/Grid
+Upload one file named USPnumber1.USPnumber2.html (Add the file late.USPnumber1.USPnumber2.html if late).
+
+Objective: Students will create a responsive webpage layout using either CSS flexbox or grid, ensuring it adapts to various screen sizes.
+
+Instructions:
+
+Initial Setup (10 minutes):
+
+Download the provided HTML template which includes a navbar, main content with sidebar, and a footer.
+Add initial global styles: font size, family, background color, etc.
+Navbar Design (10 minutes):
+
+Using either flexbox or grid, design a navbar that:
+Displays its items in a row on large screens.
+Stacks items vertically for mobile sizes.
+Has a logo on the left and nav links on the right.
+Main Content and Sidebar Design (20 minutes):
+
+Using your choice of layout system:
+Create a two-column layout with main content and a sidebar.
+For larger screens, the sidebar should be to the right of the main content. For smaller screens, the sidebar should stack below the main content.
+Ensure consistent padding and margin between elements.
+Footer Design (10 minutes):
+
+Using flexbox or grid:
+Design a footer that has three sections: About, Links, and Social Media icons.
+On wider screens, these should be side by side. On mobile, they should stack.
+Media Queries and Testing (15 minutes):
+
+Implement media queries to ensure designs switch at appropriate breakpoints.
+Test the responsiveness of your design by resizing the browser window or using developer tools to view in various device sizes.
+Feedback and Review (5 minutes):
+
+Share your screen with another student or the instructor.
+Discuss design decisions and provide feedback on the responsiveness of the layout.
+These activities are structured to ensure that students not only practice the technicalities of CSS but also think about design decisions and get feedback. By the end, they should have a good grasp on how to effectively design and layout a webpage using CSS.
+
+HTML File
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Web Design Activity</title>
+    <!-- 
+    <style>
+        Put your CSS here. For now, it's commented out.
+    </style>
+    -->
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2>Blog Post Title</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum.</p>
+        </article>
+
+        <section class="flex-gallery">
+            <figure>
+                <img src="https://via.placeholder.com/150x150" alt="Placeholder Image 1">
+                <figcaption>Image 1</figcaption>
+            </figure>
+            <figure>
+                <img src="https://via.placeholder.com/150x150" alt="Placeholder Image 2">
+                <figcaption>Image 2</figcaption>
+            </figure>
+            <figure>
+                <img src="https://via.placeholder.com/150x150" alt="Placeholder Image 3">
+                <figcaption>Image 3</figcaption>
+            </figure>
+        </section>
+
+        <section class="grid-layout">
+            <div>Grid Item A</div>
+            <div>Grid Item B</div>
+            <div>Grid Item C</div>
+            <div>Grid Item D</div>
+        </section>
+        <aside>
+            <h3>Sidebar Content</h3>
+            <ul>
+               <li><a href="#">Item 1</a></li>
+               <li><a href="#">Item 2</a></li>
+               <li><a href="#">Item 3</a></li>
+            </ul>
+        </aside>
+    </main>
+
+    <footer>
+        <p>&copy; 2023. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
+Activity Notes:
+
+Navigation Bar: Use Flexbox to style the navigation bar. Ensure the items are evenly spaced, and they stack vertically when viewed on smaller screens.
+
+Flex Gallery: This section contains three figures. The task is to use Flexbox to make them align side by side in a row and wrap onto a new line if there isn't enough space.
+
+Sidebar: This should be styled to appear on the right of the main content on larger screens and below the main content on smaller screens.
+
+Grid Layout Section: Students should use the CSS Grid to style this section, ensuring that the items are displayed in a 2x2 grid on larger screens. On smaller screens, the items should stack vertically.
+
+Responsiveness: Use media queries to make the layout responsive. Adjust the layout and design for at least two screen sizes: mobile (up to 600px) and desktop (above 600px).
+
+The students' primary challenge will be to utilize CSS Flexbox and Grid to create these layouts, ensuring that they are responsive across different devices.

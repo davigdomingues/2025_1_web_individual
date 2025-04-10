@@ -1,0 +1,27 @@
+Exercise 7: JavaScript II
+Activity: Sorting and Filtering Arrays
+Upload one JavaScript file named USPnumber1.USPnumber2.js.
+
+Objective: In this activity, students will practice using JavaScript control structures and functions to manipulate arrays of objects, simulating the processing of raw data.
+
+Instructions:
+
+Create an array of objects: Start by creating an array containing multiple objects. Each object should represent a city with the properties name, population, temperature, and weatherDescription. Here's an example of a city object:
+{
+  name: "New York",
+  population: 8405837,
+  temperature: 20,
+  weatherDescription: "Sunny"
+}
+Write a function to sort the array: Create a function called sortCities() that takes an array of city objects and a sorting criterion (e.g., by name, population, or temperature) as its arguments. The function should return a new array sorted based on the specified criterion.
+
+Write a function to filter the array: Create a function called filterCities() that takes an array of city objects and a filtering criterion (e.g., cities with a population greater than a certain value, or cities with a specific weather description) as its arguments. The function should return a new array containing only the objects that meet the filtering criterion.
+
+Test the functions: Write test cases to ensure that both the sortCities() and filterCities() functions are working correctly. Test various sorting and filtering criteria to verify that the functions produce the expected results.
+
+Combine the functions: Write a new function called processCities() that combines the functionality of the sortCities() and filterCities() functions. The processCities() function should take an array of city objects, a sorting criterion, and a filtering criterion as its arguments. The function should first filter the array using the filtering criterion, then sort the resulting array based on the sorting criterion, and finally return the processed array.
+
+Test the combined function: Write test cases for the processCities() function to ensure that it works correctly when applying both filtering and sorting criteria.
+
+Note: Since this activity is focused on JavaScript and not HTML, you can use console.log() to display the results of your functions in the browser console or a JavaScript environment like Node.js or an online editor (e.g., JSFiddle, CodePen, or Repl.it).
+

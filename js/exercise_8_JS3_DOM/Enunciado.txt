@@ -1,0 +1,47 @@
+Activity: DOM Manipulation and Traversal (80 minutes)
+
+Upload a html file named USPnumber1.USPnumber2.html.
+
+Instructions:
+
+Split into pairs for pair programming. You'll be working together on this activity to practice DOM manipulation and traversal techniques.
+
+Open your preferred code editor or browser-based environments, such as JSFiddle or CodePen.
+
+Start with the following simple HTML structure that includes a variety of elements such as headings, paragraphs, lists, images, and buttons (Change the HTML using only JavaScript):
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation Activity</title>
+</head>
+<body>
+    <h1>DOM Manipulation Activity</h1>
+    <p>Paragraph 1</p>
+    <p>Paragraph 2</p>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <img src="https://via.placeholder.com/100" alt="Placeholder Image">
+    <button id="taskButton">Perform Task</button>
+</body>
+</html
+Your tasks for this activity are:
+
+Change the text of the first paragraph to "New Paragraph 1".
+Add a new list item with the text "Item 4" at the end of the unordered list.
+Change the src attribute of the image to another URL (e.g., https://via.placeholder.com/200).
+Set the background color of the second paragraph to yellow.
+Add an event listener to the first paragraph that changes its text to "Clicked!" when clicked.
+Add an event listener to the button that, when clicked, performs all the previous tasks in sequence (1, 2, 3, 4, and 5).
+5. Work together to complete these tasks using JavaScript DOM manipulation methods, such as getElementById, querySelector, createElement, appendChild, setAttribute, style, and addEventListener.
+
+6. As you work on the activity, feel free to ask your peers or teaching assistant for help or clarification if needed.
+
+7. Once you have completed the activity, take some time to compare your solutions with other pairs. Discuss any challenges you encountered or alternative approaches you discovered.
+
+Remember, the goal of this activity is to practice your DOM manipulation and traversal skills while working collaboratively. Enjoy and have fun!
