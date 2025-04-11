@@ -1,0 +1,28 @@
+Class Activity: Interactive To-Do List Application (70 minutes)
+Upload a html file named USPnumber1.USPnumber2.html.
+
+Objective: The goal of this activity is for students to apply their knowledge of DOM events, event listeners, and event delegation to create an interactive to-do list application.
+
+Instructions:
+
+Open your preferred code editor or browser-based environment, such as JSFiddle or CodePen.
+
+Create an HTML file and include the necessary tags for a basic HTML structure (<!DOCTYPE>, <html>, <head>, <body>). Add a <script> tag inside the <head> or at the end of the <body> to write your JavaScript code.
+
+Create the following HTML structure for the to-do list application:
+
+An input field for users to enter new tasks.
+A button to add new tasks to the list.
+An empty unordered list (ul) element to display the tasks.
+
+Implement the following functionality using DOM events and event listeners:
+
+When the user clicks the "Add" button, create a new list item (li) element containing the task text entered in the input field and append it to the unordered list.
+Add an event listener to each list item to detect a click event. When a list item is clicked, toggle its CSS class to indicate that the task has been completed (e.g., by striking through the text or changing its color).
+Add an event listener for the "Delete" button, which removes the associated list item from the list when clicked.
+
+Make a nice styling of your application.
+
+As you work on the activity, discuss the implementation with your partner or group members and ask for help or clarification from the instructor or teaching assistant if needed. Once the activity is completed, share your solution with the rest of the class and discuss any challenges you encountered or alternative approaches you discovered.
+
+Remember, the goal of this activity is to practice your DOM event-handling skills while working collaboratively. Enjoy and have fun!

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>To-Do List</title>
+    <style>
+        .completed {
+          text-decoration: line-through;
+          color: gray;
+        }
+
+        .todo-container {
+          max-width: 400px;
+          margin: 40px auto;
+          font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        ul {
+          padding: 0;
+        }
+
+        li {
+          list-style: none;
+          margin: 8px 0;
+          padding: 8px 12px;
+          background-color: #f0f0f0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-radius: 5px;
+          transition: all 0.3s ease;
+          opacity: 0.7;
+        }
+
+        li.completed {
+          background-color: #e0ffe0;
+        }
+
+        li:hover {
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+          background: none;
+          border: none;
+          font-size: 16px;
+          cursor: pointer;
+          color: red;
+        }
+
+        button:hover {
+          color: darkred;
+        }
+
+        .input-group {
+          display: flex;
+          gap: 10px;
+        }
+
+        input[type="text"] {
+          flex: 1;
+          padding: 8px;
+          font-size: 14px;
+          border-radius: 4px;
+          border: 1px solid #ccc;
+        }
+
+        #addTaskBtn {
+          background-color: blue;
+          color: white;
+          border: none;
+          padding: 8px 12px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        #addTaskBtn:hover {
+          background-color: darkblue;
+        }
+    </style>
+</head>
+
+<body>
+<div class="todo-container">
+    <h1>To-Do List</h1>
+
+    <div class="input-group">
+        <input type="text" id="taskInput" placeholder="Enter a new task... (use ENTER as a shortcut)" />
+        <button id="addTaskBtn">Add Task!</button>
+    </div>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+    const tarefas = document.getElementById("taskList");
+    const texto = document.getElementById("taskInput");
+    const adicionarTarefa = document.getElementById("addTaskBtn");
+
+    // Atalho com tecla Enter
+    texto.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        adicionarTarefa.click();
+      }
+    });
+
+    adicionarTarefa.addEventListener("click", function () {
+      const informacao = texto.value.trim();
+
+      if (informacao !== "") {
+        // Verifica duplicatas
+        const tarefasExistentes = document.querySelectorAll("#taskList li");
+        let duplicada = false;
+
+        tarefasExistentes.forEach((t) => {
+          if (t.firstChild.textContent.trim() === informacao) {
+            duplicada = true;
+          }
+        });
+
+        if (duplicada) {
+          alert("Tarefa já existe!");
+          return;
+        }
+
+        const tarefa = document.createElement("li");
+        tarefa.textContent = informacao;
+
+        // Toggle completada
+        tarefa.addEventListener("click", function () {
+          tarefa.classList.toggle("completed");
+        });
+
+        // Botão deletar
+        const deletar = document.createElement("button");
+        deletar.textContent = "🗑️";
+
+        deletar.addEventListener("click", function (event) {
+          event.stopPropagation();
+          tarefa.style.opacity = "0";
+          setTimeout(() => {
+            tarefas.removeChild(tarefa);
+          }, 300);
+        });
+
+        texto.value = "";
+        tarefa.appendChild(deletar);
+        tarefas.appendChild(tarefa);
+      }
+
+      else {
+        alert("Não se pode adicionar tarefas vazias, por favor insira corretamente")
+      }
+    });
+</script>
+</body>
+</html>
