@@ -1,0 +1,22 @@
+We will use a Joke API, a free API that provides jokes and doesn't require an API key. For instance:
+
+https://v2.jokeapi.dev/
+https://official-joke-api.appspot.com/
+etc.
+Create a new HTML file and add a basic HTML structure. Add a <script> tag inside the <head> or at the end of the <body> to write your JavaScript code.
+
+Design the layout of the joke generator with the following elements:
+
+A "Get Joke" button to fetch a new joke.
+A container to display the fetched joke.
+Implement the following functionality using XMLHttpRequest or the Fetch API:
+
+When the "Get Joke" button is clicked, fetch a random joke from the Official Joke API: https://v2.jokeapi.dev/joke/Any
+Parse the JSON data returned by the API and extract the joke (setup and punchline).
+For the jokeapi, the data will need handling for single or two part joke types.
+Display the joke in the designated container.
+Add error handling to account for issues with the API request.
+
+Style the application using CSS to make it visually appealing.
+
+Good Luck.
