@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Quiz Interativo</title>
+
+    <style>
+        /* Estilo geral */
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: linear-gradient(135deg, #74ebd5 0%, #acb6e5 100%);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+
+        /* Container do Quiz */
+        .quiz-container {
+          background: #ffffff;
+          padding: 30px 25px;
+          border-radius: 12px;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+          width: 90%;
+          max-width: 600px;
+          animation: fadeIn 0.8s ease-in-out;
+        }
+
+        /* Animação de entrada */
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* Pergunta */
+        .questoes {
+          font-size: 22px;
+          font-weight: bold;
+          margin-bottom: 20px;
+          color: #333;
+        }
+
+        /* Botões de resposta */
+        .respostas button {
+          display: block;
+          width: 100%;
+          padding: 12px;
+          margin: 8px 0;
+          background-color: #3498db;
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 16px;
+          cursor: pointer;
+          transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .respostas button:hover {
+          background-color: #2980b9;
+          transform: translateY(-2px);
+        }
+
+        .respostas button.selected {
+          background-color: #2ecc71;
+        }
+
+        /* Barra de progresso */
+        .progresso {
+          margin-bottom: 20px;
+          font-size: 18px;
+          font-weight: bold;
+          color: #555;
+          text-align: center;
+        }
+
+        /* Botões de navegação */
+        .actions {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+          margin-top: 20px;
+        }
+
+        .actions div {
+          flex: 1;
+          background-color: #f1c40f;
+          padding: 10px;
+          text-align: center;
+          border-radius: 6px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+
+        .actions div:hover {
+          background-color: #f39c12;
+        }
+
+        /* Resultado final */
+        #resultado {
+          margin-top: 25px;
+          font-size: 20px;
+          font-weight: bold;
+          text-align: center;
+          color: #27ae60;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="quiz-container">
+    <div class="progresso">
+        Pergunta <span id="pergunta">1</span> de <span id="total">0</span>
+    </div>
+
+    <div class="perguntas-container">
+        <div class="questoes" id="questoes"></div>
+        <div class="respostas" id="botao-respostas"></div>
+    </div>
+
+    <div class="actions">
+        <div class="voltar" id="voltar">Voltar</div>
+        <div class="proximo" id="avancar">Próximo</div>
+        <div class="enviar" id="enviar">Enviar</div>
+    </div>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+    const questoes = [
+      {
+        pergunta: "Quem é Dilvan Moreira de Abreu?",
+        opcoes: [
+          "O reitor",
+          "O web semantiker do MIT",
+          "Dilvan Moreira de Abreu :)"
+        ],
+        resposta: "Dilvan Moreira de Abreu :)"
+      },
+      {
+        pergunta: "O que é salgado",
+        opcoes: [
+          "Não doce",
+          "Não azedo",
+          "Não amargo"
+        ],
+        resposta: "Não doce"
+      },
+      {
+        pergunta: "Quem é Mr.Bean?",
+        opcoes: [
+          "Um comediante",
+          "Um ator",
+          "Um comediante ator"
+        ],
+        resposta: "Um comediante ator"
+      }
+    ];
+
+    let questaoAtual = 0;
+    const respostaUsuario = new Array(questoes.length);
+    const questaoElemento = document.getElementById("questoes");
+    const botaoResposta = document.getElementById("botao-respostas");
+    const perguntaSpan = document.getElementById("pergunta");
+    const totalSpan = document.getElementById("total");
+    const botaoProximo = document.getElementById("avancar");
+    const botaoVoltar = document.getElementById("voltar");
+    const botaoEnviar = document.getElementById("enviar");
+    const resultadoFinal = document.getElementById("resultado");
+
+    document.addEventListener("DOMContentLoaded", () => {
+      totalSpan.textContent = questoes.length;
+      mostrarQuestao();
+    });
+
+    function mostrarQuestao() {
+      const questao = questoes[questaoAtual];
+      perguntaSpan.textContent = questaoAtual + 1;
+      questaoElemento.textContent = questao.pergunta;
+
+      botaoResposta.innerHTML = "";
+      questao.opcoes.forEach(opcao => {
+        const botao = document.createElement("button");
+        botao.textContent = opcao;
+        botao.addEventListener('click', () => {
+          selecionarResposta(botao, opcao);
+        });
+
+        if (respostaUsuario[questaoAtual] === opcao) {
+          botao.classList.add("selected");
+        }
+
+        botaoResposta.appendChild(botao);
+      });
+
+      botaoVoltar.style.display = questaoAtual === 0 ? "none" : "block";
+      botaoProximo.style.display = questaoAtual === questoes.length - 1 ? "none" : "block";
+      botaoEnviar.style.display = questaoAtual === questoes.length - 1 ? "block" : "none";
+
+      resultadoFinal.textContent = "";
+    }
+
+    function selecionarResposta(botao, resposta) {
+      const botoes = botaoResposta.querySelectorAll("button");
+      botoes.forEach(selecionado => selecionado.classList.remove("selected"));
+
+      botao.classList.add("selected");
+      respostaUsuario[questaoAtual] = resposta;
+    }
+
+    botaoProximo.addEventListener('click', () => {
+      if (!respostaUsuario[questaoAtual]) {
+        alert("Por favor, selecione uma resposta antes de continuar.");
+        return;
+      }
+      if (questaoAtual < questoes.length - 1) {
+        questaoAtual++;
+        mostrarQuestao();
+      }
+    });
+
+    botaoVoltar.addEventListener('click', () => {
+      if (questaoAtual > 0) {
+        questaoAtual--;
+        mostrarQuestao();
+      }
+    });
+
+    botaoEnviar.addEventListener('click', () => {
+      if (!respostaUsuario[questaoAtual]) {
+        alert("Por favor, selecione uma resposta antes de enviar.");
+        return;
+      }
+      let acertos = 0;
+      questoes.forEach((questao, index) => {
+        if (questao.resposta.trim() === (respostaUsuario[index] || "").trim()) {
+          acertos++;
+        }
+      });
+      resultadoFinal.textContent = `Você acertou ${acertos} de ${questoes.length} questões!`;
+    });
+</script>
+
+</body>
+
+</html>
