@@ -1,0 +1,26 @@
+Objective: The goal of this activity is for students to apply their knowledge of advanced event handling, event objects, and custom events to create an interactive quiz application.
+
+Instructions:
+
+Open your preferred code editor or browser-based environment, such as JSFiddle or CodePen.
+
+Create an HTML file and include the necessary tags for a basic HTML structure (<!DOCTYPE>, <html>, <head>, <body>). Add a <script> tag inside the <head> or at the end of the <body> to write your JavaScript code.
+
+Design the layout of the quiz application with the following elements:
+
+A question container to display the current question.
+Multiple choice answer buttons.
+A progress bar or counter to indicate the current question number.
+A "Next" button to proceed to the next question.
+A "Submit" button to submit the quiz and display the results.
+Create an array of question objects, each containing a question, an array of possible answers, and the correct answer.
+
+Implement the following functionality using advanced event handling, event objects, and custom events:
+
+Display the current question and possible answers when the page loads or when the "Next" button is clicked.
+Use event listeners to detect when an answer button is clicked and store the user's selection.
+Update the progress bar or counter to reflect the current question number.
+When the "Submit" button is clicked, calculate the user's score by comparing their selected answers with the correct answers, and display the results on the screen.
+Add custom events to handle specific quiz-related actions, such as updating the progress bar or displaying the final results. A custom event is created specifically for an application, like "AnswerGiven".
+
+As you work on the activity, discuss the implementation with your partner and ask for help or clarification from the instructor or teaching assistant if needed. 
