@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Capturador de clima de cidades mundiais</title>
+
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          padding: 20px;
+          background: #f0f8ff;
+        }
+
+        .secao-pesquisa,
+        .secao-coordenadas {
+          margin-bottom: 20px;
+        }
+
+        input,
+        button {
+          padding: 10px;
+          margin: 5px;
+          font-size: 16px;
+        }
+
+        .exibicao-clima {
+          background: #ffffff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          max-width: 400px;
+        }
+
+        .exibicao-clima img {
+          width: 60px;
+          height: 60px;
+        }
+    </style>
+
+</head>
+<body>
+<h1>Capturador de clima citadino</h1>
+
+<div class="secao-pesquisa">
+    <label for="pesquisa-cidade">
+        <input type="text" placeholder="Digite a cidade" id="pesquisa-cidade">
+    </label>
+    <button id="buscarCoordenadas">Capturar clima</button>
+</div>
+
+<br>
+
+<div class="secao-coordenadas">
+    <label for="entrada-latitude">
+        <input type="text" placeholder="Digite a latitude" id="entrada-latitude">
+    </label>
+    <label for="entrada-longitude">
+        <input type="text" placeholder="Digite a longitude" id="entrada-longitude">
+    </label>
+    <button id="buscarClima">Capturar clima</button>
+</div>
+
+<br><br><br>
+
+<div class="exibicao-clima" id="exibirClima"></div>
+
+<script>
+    const botaoBuscarLocal  = document.getElementById("buscarCoordenadas");
+    const botaoBuscarClima  = document.getElementById("buscarClima");
+    const elExibirClima     = document.getElementById("exibirClima");
+
+    botaoBuscarLocal.addEventListener("click", async () => {
+      // limpa qualquer resultado anterior
+      elExibirClima.innerHTML = "";
+
+      const cidade = document.getElementById("pesquisa-cidade").value.trim();
+      if (!cidade) {
+        alert("Insira o nome de uma cidade válida...");
+        return;
+      }
+
+      try {
+        const resposta = await fetch(
+          `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cidade)}`
+        );
+        if (!resposta.ok) throw new Error("Cidade não existente ou não localizada!");
+
+        const dados = await resposta.json();
+        if (!dados.results || dados.results.length === 0)
+          throw new Error("Cidade não existente ou não localizada!");
+
+        const { latitude, longitude } = dados.results[0];
+        document.getElementById("entrada-latitude").value  = latitude;
+        document.getElementById("entrada-longitude").value = longitude;
+      } catch (erro) {
+        exibirErro(erro.message);
+      }
+    });
+
+    botaoBuscarClima.addEventListener("click", async () => {
+      // limpa qualquer resultado anterior
+      elExibirClima.innerHTML = "";
+
+      const latitude  = document.getElementById("entrada-latitude").value.trim();
+      const longitude = document.getElementById("entrada-longitude").value.trim();
+      if (!latitude || !longitude) {
+        alert("Por favor, insira latitude e longitude!");
+        return;
+      }
+
+      try {
+        const resposta = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+        );
+        if (!resposta.ok) throw new Error("Erro na captura da resposta na API");
+
+        const dados      = await resposta.json();
+        const codigoClima = dados.current_weather.weathercode;
+
+        elExibirClima.innerHTML = `
+          <h2>Clima Atual</h2>
+          <p><strong>Latitude:</strong> ${latitude}</p>
+          <p><strong>Longitude:</strong> ${longitude}</p>
+          <p><strong>Temperatura:</strong> ${dados.current_weather.temperature}°C</p>
+          <p><strong>Condição:</strong> ${mapearCondicoesClima(codigoClima)}</p>
+          <img src="${capturarIcone(codigoClima)}" alt="Ícone do Clima">
+        `;
+      } catch (erro) {
+        exibirErro(erro.message);
+      }
+    });
+
+    function mapearCondicoesClima(codigoClima) {
+      const hora  = new Date().getHours();
+      const isDay = hora >= 6 && hora < 18;
+      const condicoes = {
+        0:  { day: "Sunny",                night: "Clear" },
+        1:  { day: "Mainly Sunny",         night: "Mainly Clear" },
+        2:  { day: "Partly Cloudy",        night: "Partly Cloudy" },
+        3:  { day: "Cloudy",               night: "Cloudy" },
+        45: { day: "Foggy",                night: "Foggy" },
+        48: { day: "Rime Fog",             night: "Rime Fog" },
+        51: { day: "Light Drizzle",        night: "Light Drizzle" },
+        53: { day: "Drizzle",              night: "Drizzle" },
+        55: { day: "Heavy Drizzle",        night: "Heavy Drizzle" },
+        56: { day: "Light Freezing Drizzle", night: "Light Freezing Drizzle" },
+        57: { day: "Freezing Drizzle",     night: "Freezing Drizzle" },
+        61: { day: "Light Rain",           night: "Light Rain" },
+        63: { day: "Rain",                 night: "Rain" },
+        65: { day: "Heavy Rain",           night: "Heavy Rain" },
+        66: { day: "Light Freezing Rain",  night: "Light Freezing Rain" },
+        67: { day: "Freezing Rain",        night: "Freezing Rain" },
+        71: { day: "Light Snow",           night: "Light Snow" },
+        73: { day: "Snow",                 night: "Snow" },
+        75: { day: "Heavy Snow",           night: "Heavy Snow" },
+        77: { day: "Snow Grains",          night: "Snow Grains" },
+        80: { day: "Light Showers",        night: "Light Showers" },
+        81: { day: "Showers",              night: "Showers" },
+        82: { day: "Heavy Showers",        night: "Heavy Showers" },
+        85: { day: "Light Snow Showers",   night: "Light Snow Showers" },
+        86: { day: "Snow Showers",         night: "Snow Showers" },
+        95: { day: "Thunderstorm",         night: "Thunderstorm" },
+        96: { day: "Light Thunderstorms With Hail", night: "Light Thunderstorms With Hail" },
+        99: { day: "Thunderstorm With Hail", night: "Thunderstorm With Hail" }
+      };
+      const key = String(codigoClima);
+      return condicoes[key]
+        ? (isDay ? condicoes[key].day : condicoes[key].night)
+        : "";
+    }
+
+    function capturarIcone(codigoClima) {
+      const hora  = new Date().getHours();
+      const isDay = hora >= 6 && hora < 18;
+      const icones = {
+        0:   { day: "https://openweathermap.org/img/wn/01d@2x.png", night: "https://openweathermap.org/img/wn/01n@2x.png" },
+        1:   { day: "https://openweathermap.org/img/wn/01d@2x.png", night: "https://openweathermap.org/img/wn/01n@2x.png" },
+        2:   { day: "https://openweathermap.org/img/wn/02d@2x.png", night: "https://openweathermap.org/img/wn/02n@2x.png" },
+        3:   { day: "https://openweathermap.org/img/wn/03d@2x.png", night: "https://openweathermap.org/img/wn/03n@2x.png" },
+        45:  { day: "https://openweathermap.org/img/wn/50d@2x.png", night: "https://openweathermap.org/img/wn/50n@2x.png" },
+        48:  { day: "https://openweathermap.org/img/wn/50d@2x.png", night: "https://openweathermap.org/img/wn/50n@2x.png" },
+        51:  { day: "https://openweathermap.org/img/wn/09d@2x.png", night: "https://openweathermap.org/img/wn/09n@2x.png" },
+        53:  { day: "https://openweathermap.org/img/wn/09d@2x.png", night: "https://openweathermap.org/img/wn/09n@2x.png" },
+        55:  { day: "https://openweathermap.org/img/wn/09d@2x.png", night: "https://openweathermap.org/img/wn/09n@2x.png" },
+        56:  { day: "https://openweathermap.org/img/wn/09d@2x.png", night: "https://openweathermap.org/img/wn/09n@2x.png" },
+        57:  { day: "https://openweathermap.org/img/wn/09d@2x.png", night: "https://openweathermap.org/img/wn/09n@2x.png" },
+        61:  { day: "https://openweathermap.org/img/wn/10d@2x.png", night: "https://openweathermap.org/img/wn/10n@2x.png" },
+        63:  { day: "https://openweathermap.org/img/wn/10d@2x.png", night: "https://openweathermap.org/img/wn/10n@2x.png" },
+        65:  { day: "https://openweathermap.org/img/wn/10d@2x.png", night: "https://openweathermap.org/img/wn/10n@2x.png" },
+        66:  { day: "https://openweathermap.org/img/wn/10d@2x.png", night: "https://openweathermap.org/img/wn/10n@2x.png" },
+        67:  { day: "https://openweathermap.org/img/wn/10d@2x.png", night: "https://openweathermap.org/img/wn/10n@2x.png" },
+        71:  { day: "https://openweathermap.org/img/wn/13d@2x.png", night: "https://openweathermap.org/img/wn/13n@2x.png" },
+        73:  { day: "https://openweathermap.org/img/wn/13d@2x.png", night: "https://openweathermap.org/img/wn/13n@2x.png" },
+        75:  { day: "https://openweathermap.org/img/wn/13d@2x.png", night: "https://openweathermap.org/img/wn/13n@2x.png" },
+        77:  { day: "https://openweathermap.org/img/wn/13d@2x.png", night: "https://openweathermap.org/img/wn/13n@2x.png" },
+        80:  { day: "https://openweathermap.org/img/wn/09d@2x.png", night: "https://openweathermap.org/img/wn/09n@2x.png" },
+        81:  { day: "https://openweathermap.org/img/wn/09d@2x.png", night: "https://openweathermap.org/img/wn/09n@2x.png" },
+        82:  { day: "https://openweathermap.org/img/wn/09d@2x.png", night: "https://openweathermap.org/img/wn/09n@2x.png" },
+        85:  { day: "https://openweathermap.org/img/wn/13d@2x.png", night: "https://openweathermap.org/img/wn/13n@2x.png" },
+        86:  { day: "https://openweathermap.org/img/wn/13d@2x.png", night: "https://openweathermap.org/img/wn/13n@2x.png" },
+        95:  { day: "https://openweathermap.org/img/wn/11d@2x.png", night: "https://openweathermap.org/img/wn/11n@2x.png" },
+        96:  { day: "https://openweathermap.org/img/wn/11d@2x.png", night: "https://openweathermap.org/img/wn/11n@2x.png" },
+        99:  { day: "https://openweathermap.org/img/wn/11d@2x.png", night: "https://openweathermap.org/img/wn/11n@2x.png" }
+      };
+      const key = String(codigoClima);
+      return icones[key] ? (isDay ? icones[key].day : icones[key].night) : "";
+    }
+
+    function exibirErro(mensagem) {
+      elExibirClima.innerHTML = `<p style="color:red;">Erro: ${mensagem}</p>`;
+    }
+</script>
+</body>
+</html>
