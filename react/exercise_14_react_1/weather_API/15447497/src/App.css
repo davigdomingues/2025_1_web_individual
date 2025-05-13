@@ -1,0 +1,13 @@
+/* src/App.css */
+.App {
+  text-align: center;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
+}
+
+input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 250px;
+}
