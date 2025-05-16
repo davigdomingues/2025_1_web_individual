@@ -51,12 +51,13 @@ function WeatherDisplay({ city }) {
           throw new Error("Cidade não encontrada.");
         }
 
-        const { latitude, longitude } = geoData.results[0];
+        const { latitude, longitude, name } = geoData.results[0];
 
         const weatherRes = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
         );
         const weatherData = await weatherRes.json();
+        weatherData.current_weather.city = name;
 
         setWeather(weatherData.current_weather);
       } catch (err) {
@@ -78,7 +79,7 @@ function WeatherDisplay({ city }) {
   return (
     <div className="weather-container">
       <h2>Clima atual</h2>
-      <p>Cidade: {city}</p>
+      <p>Cidade: {weather.city}</p>
       <p>Temperatura: {weather.temperature}°C</p>
       <p>Velocidade do vento: {weather.windspeed} km/h</p>
       <p>Condição: {weatherDescriptions[weather.weathercode] || "Desconhecida"}</p>
