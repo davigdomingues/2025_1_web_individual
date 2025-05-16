@@ -24,7 +24,7 @@ São nomes ambíguos (por exemplo, "Março" pode coincidir com nomes de vilas ou
 
 Existem como topônimos reais em algum lugar do mundo, mesmo que pouco conhecidos.
 
-Parecem letras ou siglas usadas em mapas (por exemplo, "hhh" pode coincidir com algum código, abreviação ou dado histórico).
+Parecem letras ou siglas usadas em mapas.
 
 Exemplos:
 "Janeiro": Pode ser interpretado como "Rio de Janeiro", "Janeiro de Baixo" (em Portugal), etc.
