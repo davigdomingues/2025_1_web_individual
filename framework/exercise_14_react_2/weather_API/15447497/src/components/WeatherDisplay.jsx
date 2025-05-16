@@ -78,6 +78,7 @@ function WeatherDisplay({ city }) {
   return (
     <div className="weather-container">
       <h2>Clima atual</h2>
+      <p>Cidade: {city}</p>
       <p>Temperatura: {weather.temperature}°C</p>
       <p>Velocidade do vento: {weather.windspeed} km/h</p>
       <p>Condição: {weatherDescriptions[weather.weathercode] || "Desconhecida"}</p>
