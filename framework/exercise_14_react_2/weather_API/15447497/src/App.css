@@ -1,13 +1,94 @@
 /* src/App.css */
+body {
+  margin: 0;
+  background-color: #f0f8ff;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .App {
   text-align: center;
   padding: 2rem;
-  font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-top: 5vh;
 }
 
-input {
-  padding: 0.5rem;
+h1 {
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+/* Estilo do input e botão */
+form {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+input[type="text"] {
+  padding: 0.6rem 1rem;
   font-size: 1rem;
   width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+/* Exibição do clima */
+h2 {
+  color: #0077cc;
+}
+
+p {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+
+p[style*="red"] {
+  color: #d00000 !important;
+}
+
+/* Responsivo */
+@media (max-width: 500px) {
+  .App {
+    padding: 1rem;
+  }
+
+  input[type="text"] {
+    width: 100%;
+  }
+
+  form {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  button {
+    width: 100%;
+  }
 }

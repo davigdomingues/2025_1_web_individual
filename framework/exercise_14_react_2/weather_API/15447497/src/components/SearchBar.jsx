@@ -1,22 +1,25 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
-function SearchBar({onSearch}) {
-    const[city, setCity] = useState("");
+function SearchBar({ onSearch }) {
+    const [city, setCity] = useState("");
 
-    const handleKeyPress = (e) => {
-        if (e.key === "Enter") {
+    const handleSubmit = (e) => {
+        e.preventDefault(); // Evita o recarregamento da página
+        if (city.trim() !== "") {
             onSearch(city);
-            setCity("");   
+            setCity("");
         }
-    }
+    };
 
     return (
-        <input 
-            type="text" 
-            placeholder="Digite o nome da cidade" 
-            value={city} 
-            onChange={(e) => setCity(e.target.value)}
-            onKeyPress={handleKeyPress}/>
+        <form onSubmit={handleSubmit}>
+            <input 
+                type="text" 
+                placeholder="Digite o nome da cidade" 
+                value={city} 
+                onChange={(e) => setCity(e.target.value)}
+            />
+        </form>
     );
 }
 
