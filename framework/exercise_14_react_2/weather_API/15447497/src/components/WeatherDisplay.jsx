@@ -3,18 +3,47 @@ import React, { useEffect, useState } from "react";
 function WeatherDisplay({ city }) {
   const [weather, setWeather] = useState(null);
   const [erro, setErro] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const weatherDescriptions = {
+    0: "Céu limpo",
+    1: "Principalmente limpo",
+    2: "Parcialmente nublado",
+    3: "Encoberto",
+    45: "Névoa",
+    48: "Névoa com geada",
+    51: "Chuvisco leve",
+    53: "Chuvisco moderado",
+    55: "Chuvisco denso",
+    61: "Chuva fraca",
+    63: "Chuva moderada",
+    65: "Chuva intensa",
+    80: "Pancadas de chuva",
+    95: "Trovoadas",
+    99: "Tempestades com granizo",
+  };
 
   useEffect(() => {
-    if (!city) 
-        return;
+    if (!city) {
+      // Se não tem cidade, não mostra nada nem mensagem
+      setWeather(null);
+      setErro(null);
+      setIsLoading(false);
+      return;
+    }
 
     async function fetchWeather() {
       try {
         setErro(null);
         setWeather(null);
+        setIsLoading(true);
+
+        if (!/^[a-zA-Z\sÀ-ÿ]+$/.test(city)) {
+          throw new Error("Nome de cidade inválido.");
+        }
 
         const geoRes = await fetch(
-          `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`
+          `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`
         );
         const geoData = await geoRes.json();
 
@@ -30,28 +59,28 @@ function WeatherDisplay({ city }) {
         const weatherData = await weatherRes.json();
 
         setWeather(weatherData.current_weather);
-      } 
-      
-      catch (err) {
+      } catch (err) {
         setErro(err.message);
+      } finally {
+        setIsLoading(false);
       }
     }
 
     fetchWeather();
   }, [city]);
 
-  if (erro) 
-    return <p style={{ color: "red" }}>Erro: {erro}</p>;
+  if (!city) return null; // ou pode exibir um texto inicial, tipo "Digite uma cidade"
 
-  if (!weather) 
-    return <p>Carregando dados do clima...</p>;
+  if (erro) return <p className="erro">Erro: {erro}</p>;
+  if (isLoading) return <p className="loading">Carregando dados do clima...</p>;
+  if (!weather) return null; // enquanto não chegou nenhum dado e não está carregando
 
   return (
-    <div>
+    <div className="weather-container">
       <h2>Clima atual</h2>
       <p>Temperatura: {weather.temperature}°C</p>
       <p>Velocidade do vento: {weather.windspeed} km/h</p>
-      <p>Condição: {weather.weathercode}</p>
+      <p>Condição: {weatherDescriptions[weather.weathercode] || "Desconhecida"}</p>
     </div>
   );
 }

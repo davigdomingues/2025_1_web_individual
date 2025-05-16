@@ -73,6 +73,12 @@ p[style*="red"] {
   color: #d00000 !important;
 }
 
+.error-message {
+  color: red;
+  margin-top: 5px;
+  font-size: 0.9rem;
+}
+
 /* Responsivo */
 @media (max-width: 500px) {
   .App {
