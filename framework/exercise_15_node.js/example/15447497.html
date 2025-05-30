@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Exercise 15</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        background-color: #f9f9f9;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      h1,
+      h2 {
+        color: #333;
+      }
+
+      a {
+        display: block;
+        margin: 0.5rem 0;
+        color: #1a73e8;
+        text-decoration: none;
+      }
+
+      form {
+        margin-top: 1rem;
+      }
+
+      input[type="number"] {
+        padding: 0.5rem;
+        width: 100px;
+        margin-right: 0.5rem;
+      }
+
+      button {
+        padding: 0.5rem 1rem;
+        background-color: #1a73e8;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #1663c7;
+      }
+
+      #resultado {
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        color: green;
+      }
+
+      hr {
+        margin: 2rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bem-vindo à página inicial</h1>
+    <p><a href="/">Ir para pagina inicial</a></p>
+    <hr />
+
+    <h2>Gerar número aleatório personalizado</h2>
+    <form id="random-form">
+      <label for="max">Digite o valor máximo:</label>
+      <input type="number" id="max" name="max" min="1" required />
+      <button type="submit">Gerar</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+      const form = document.getElementById("random-form");
+      const resultado = document.getElementById("resultado");
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault(); // Impede recarregamento da página
+
+        const max = document.getElementById("max").value;
+        try {
+          const response = await fetch(`/random?max=${max}`);
+          const html = await response.text();
+          resultado.innerHTML = html;
+        } catch (error) {
+          resultado.textContent = "Erro ao obter número aleatório.";
+          resultado.style.color = "red";
+        }
+      });
+    </script>
+  </body>
+</html>
